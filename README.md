@@ -1,2 +1,3 @@
-# dfilter_imaging
-Imaging delay-filtered visibilities
+"""
+Tool to image delay filtered visibilities
+"""
