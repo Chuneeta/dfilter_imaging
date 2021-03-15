@@ -1,0 +1,21 @@
+2021-03-15 11:38:29	INFO	::casa	
+2021-03-15 11:38:29	INFO	::casa	CASA Version MODULAR 6.2.0.103
+2021-03-15 11:38:29	INFO	::casa	Can't import casatelemetry module.
+2021-03-15 11:38:29	INFO	exportuvfits::::casa	##########################################
+2021-03-15 11:38:29	INFO	exportuvfits::::casa	##### Begin Task: exportuvfits       #####
+2021-03-15 11:38:29	INFO	exportuvfits::::casa	exportuvfits( vis='/Users/Ridhima/Softwares/anaconda3/lib/python3.6/site-packages/dfilter_imaging-1.1.0-py3.6.egg/dfilter_imaging/data/zen.2458114.31193.HH.xx.t0.ms', fitsfile='/Users/Ridhima/Softwares/anaconda3/lib/python3.6/site-packages/dfilter_imaging-1.1.0-py3.6.egg/dfilter_imaging/data/zen.2458114.31193.HH.xx.t0.uvfits', datacolumn='corrected', field='', spw='', antenna='', timerange='', writesyscal=False, multisource=True, combinespw=True, writestation=True, padwithflags=False, overwrite=False )
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::write	 nchan=1024 startchan=0 stepchan=1 avgchan=1
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::write	Converting MeasurementSet /Users/Ridhima/Softwares/anaconda3/lib/python3.6/site-packages/dfilter_imaging-1.1.0-py3.6.egg/dfilter_imaging/data/zen.2458114.31193.HH.xx.t0.ms to FITS file '/Users/Ridhima/Softwares/anaconda3/lib/python3.6/site-packages/dfilter_imaging-1.1.0-py3.6.egg/dfilter_imaging/data/zen.2458114.31193.HH.xx.t0.uvfits'
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::_writeMain	CORRECTED_DATA does not exist, writing DATA
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::_writeMain	Frequency reference frame is TOPOCENT
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::write	Writing AIPS FQ table
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::writeFQ	Found 1 spectral windows 
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::write	Writing AIPS AN table
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::writeAN	Using ITRF frame for antenna positions.
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::writeAN	Found 144 antennas in array #1
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::write	Writing AIPS SU table
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::writeSU	Not setting velocity types
+2021-03-15 11:38:29	INFO	exportuvfits::MSFitsOutput::writeSU	writing 1 sources
+2021-03-15 11:38:30	INFO	exportuvfits::::casa	Task exportuvfits complete. Start time: 2021-03-15 16:38:29.395097 End time: 2021-03-15 16:38:29.502374
+2021-03-15 11:38:30	INFO	exportuvfits::::casa	##### End Task: exportuvfits         #####
+2021-03-15 11:38:30	INFO	exportuvfits::::casa	##########################################
