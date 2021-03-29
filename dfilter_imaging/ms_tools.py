@@ -51,4 +51,5 @@ class MSet(object):
         """
         Convert Measurement set to uvfits file
         """
+        # NOTE: The phase center shifts to (0.0, 0.0) during the conversion
         ctk.exportuvfits(self.msfile, uvfits_name, overwrite=overwrite)
