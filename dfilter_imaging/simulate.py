@@ -13,17 +13,23 @@ class Simulate():
     
     def read_sim_parameters(self):
         params_array = np.loadtxt(self.sparams)
-        return params_array[0], params_array[1], params_array[2], params_array[3], params_array[4]    
-
+        if params_array.ndim == 1:
+            return [params_array[0]], [params_array[1]], [params_array[2]], [params_array[3]], [params_array[4]]  
+        else:
+            return params_array[:,0].tolist(), params_array[:,1].tolist(), params_array[:,2].tolist(), params_array[:,3].tolist(), params_array[:,4].tolist()
+    
     def create_casa_skymodel(self):
         # currently works for a single point source
-        ras, decs, fluxs, sis, freqs = self.read_sim_parameters()
-        directions = 'J2000 {} {}'.format(crd.deg2hms(ras), crd.deg2dms(decs))
+        sim_parameters = self.read_sim_parameters()
+        ras, decs, fluxs, sis, freqs = sim_parameters[0], sim_parameters[1], sim_parameters[2], sim_parameters[3], sim_parameters[4]        
+        directions = ['J2000 {} {}'.format(crd.deg2hms(ra), crd.deg2dms(dec)) for ra, dec in zip(ras, decs)]
         self.casa_skymodel = self.sparams.replace('.txt', '.cl')
         if os.path.exists(self.casa_skymodel):
             os.system('rm -rf {}'.format(self.casa_skymodel))
         cl = ct.componentlist()
-        cl.addcomponent(flux=fluxs, fluxunit='Jy', polarization='Stokes', dir=directions, shape='point', freq=freqs * 1e6, spectrumtype='spectral index', index=sis)
+        print (type(fluxs[0]), type(directions[0]), type(freqs[0]), type(sis[0]))
+        for i in range(len(fluxs)):
+            cl.addcomponent(flux=fluxs[i], fluxunit='Jy', polarization='Stokes', dir=directions[i], shape='point', freq=freqs[i], spectrumtype='spectral index', index=sis[i])
         cl.rename(self.casa_skymodel)
         cl.close()
 
