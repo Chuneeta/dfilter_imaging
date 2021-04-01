@@ -7,7 +7,7 @@ class Image():
     def __init__(self, msfile):
         self.msfile = msfile
 
-    def generate_mfs_image(self, imagename, cell='8arcmin', imsize=512, weigh:wting='uniform', niter=0, start=0, stop=1023, threshold='0Jy', phasecenter='', pblimit=0):
+    def generate_mfs_image(self, imagename, cell='8arcmin', imsize=512, weighting='uniform', niter=0, start=0, stop=1023, threshold='0Jy', phasecenter='', pblimit=0):
         #vp = ct.vpmanager()
         #vp.setpbimage(telescope='HERA', compleximage=pbimage)
         #vp.saveastable(pbimage + '.tab')
@@ -29,3 +29,5 @@ class Image():
         os.system('rm -rf {}.pb')
         os.system('rm -rf {}.sumwt')
 
+    def plot_fitsfile(self, fitsfile, vmin=None, vmax=None, savefig=False, figname=''):
+        ft.plot_fitsfile(fitsfile, vmin=vmin, vmax=vmax, savefig=savefig, figname=figname)
