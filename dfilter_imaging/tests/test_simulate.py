@@ -8,6 +8,7 @@ import os
 # MSFILE
 msfile = os.path.join(DATA_PATH, 'zen.2458114.31193.HH.xx.t0.ms')
 params_file = os.path.join(DATA_PATH, 'sim_params.txt')
+params_2file = os.path.join(DATA_PATH, 'sim_2params.txt')
 
 class Test_Simulate():
     def test_init_ms(self):
@@ -27,7 +28,21 @@ class Test_Simulate():
         sim = sm.Simulate(msfile, sparams=params_file)
         params = sim.read_sim_parameters()
         nt.assert_equal(len(params), 5)
-        np.testing.assert_equal(params, np.array([ 50.25,  30.78,   1.  ,  -0.7 , 150.  ]))
+        np.testing.assert_equal(params[0], [50.25])
+        np.testing.assert_equal(params[1], [30.78])
+        np.testing.assert_equal(params[2], [1.])
+        np.testing.assert_equal(params[3], [-0.7])
+        np.testing.assert_equal(params[4], [150000000.])
+
+    def test_read_sim2_parameters(self):
+        sim = sm.Simulate(msfile, sparams=params_2file)
+        params = sim.read_sim_parameters()
+        nt.assert_equal(len(params), 5)
+        np.testing.assert_equal(params[0], [50.25, 50.25])
+        np.testing.assert_equal(params[1], [30.78, 30.78])
+        np.testing.assert_equal(params[2], [1., 1.])
+        np.testing.assert_equal(params[3], [-0.7, -0.7])
+        np.testing.assert_equal(params[4], [150000000, 150000000])
     
     #def test_complist_input(self):
     #    sim = sm.Simulate(msfile, sparams=params_file)
@@ -70,7 +85,7 @@ class Test_Simulate():
         sk = rs.Skymodel(skymodel)
         freq = sk.get_freqs()
         input_params = np.loadtxt(params_file)
-        nt.assert_equal(freq[0], input_params[4] * 1e6)
+        nt.assert_equal(freq[0], input_params[4])
 
     def test_complist_sindex(self):
         sim = sm.Simulate(msfile, sparams=params_file)
