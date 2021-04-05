@@ -27,7 +27,6 @@ class Simulate():
         if os.path.exists(self.casa_skymodel):
             os.system('rm -rf {}'.format(self.casa_skymodel))
         cl = ct.componentlist()
-        print (type(fluxs[0]), type(directions[0]), type(freqs[0]), type(sis[0]))
         for i in range(len(fluxs)):
             cl.addcomponent(flux=fluxs[i], fluxunit='Jy', polarization='Stokes', dir=directions[i], shape='point', freq=freqs[i], spectrumtype='spectral index', index=sis[i])
         cl.rename(self.casa_skymodel)
