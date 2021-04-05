@@ -22,12 +22,12 @@ class Image():
         ctk.exportfits(imagename=imagename, fitsimage=fitsname, overwrite=overwrite)
 
     def remove_casa_image(self, imagename):
-        os.system('rm -rf {}.image')
-        os.system('rm -rf {}.psf')
-        os.system('rm -rf {}.residual')
-        os.system('rm -rf {}.model')
-        os.system('rm -rf {}.pb')
-        os.system('rm -rf {}.sumwt')
+        os.system('rm -rf {}.image'.format(imagename))
+        os.system('rm -rf {}.psf'.format(imagename))
+        os.system('rm -rf {}.residual'.format(imagename))
+        os.system('rm -rf {}.model'.format(imagename))
+        os.system('rm -rf {}.pb'.format(imagename))
+        os.system('rm -rf {}.sumwt'.format(imagename))
 
     def plot_fitsfile(self, fitsfile, vmin=None, vmax=None, savefig=False, figname=''):
         ft.plot_fitsfile(fitsfile, vmin=vmin, vmax=vmax, savefig=savefig, figname=figname)
