@@ -1,5 +1,6 @@
 import pyuvdata
 import casatasks as ctk
+import os, sys
 
 class UVfits(object):
     def __init__(self, uvfits):
@@ -9,5 +10,7 @@ class UVfits(object):
         self.uvf = pyuvdata.UVData()
         self.uvf.read_uvfits(self.uvfits)
 
-    def convert_to_ms(self, msname):
+    def convert_to_ms(self, msname, overwrite=False):
+        if overwrite:
+            os.system('rm -rf {}'.format(msname))
         ctk.importuvfits(self.uvfits, msname)
