@@ -2,6 +2,7 @@ import casatools as ct
 import casatasks as ctk
 import numpy as np
 import os
+import random
 
 class MSet(object):
     def __init__(self, msfile):
@@ -53,3 +54,16 @@ class MSet(object):
         """
         # NOTE: The phase center shifts to (0.0, 0.0) during the conversion
         ctk.exportuvfits(self.msfile, uvfits_name, overwrite=overwrite)
+
+    def write_data(self, data_array, column):
+        self.open_msfile(nomodify=False)
+        self.tb.putcol(column, data_array)
+        self.tb.close()
+
+    def add_noise_chan(self, column='DATA'):
+        data = self.read_col(column)
+        _sh0, _sh1, _sh2 = data.shape
+        nfreq = _sh1
+        for i in range(nfreq):
+            data[0, i, :] = data[0, i, :] * (1 + (random.uniform(0, 1) * 1e-3))
+        self.write_data(data, 'DATA')
