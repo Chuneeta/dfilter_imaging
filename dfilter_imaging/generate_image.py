@@ -28,6 +28,7 @@ class Image():
         os.system('rm -rf {}.model'.format(imagename))
         os.system('rm -rf {}.pb'.format(imagename))
         os.system('rm -rf {}.sumwt'.format(imagename))
+        os.system('rm -rf {}.mask'.format(imagename))
 
     def plot_fitsfile(self, fitsfile, vmin=None, vmax=None, savefig=False, figname=''):
         ft.plot_fitsfile(fitsfile, vmin=vmin, vmax=vmax, savefig=savefig, figname=figname)
