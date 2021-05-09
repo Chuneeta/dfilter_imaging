@@ -9,7 +9,7 @@ class UVfits(object):
 
     def read_uvfits(self):
         self.uvf = pyuvdata.UVData()
-        self.uvf.read_uvfits(self.uvfits)
+        self.uvf.read_uvfits(self.uvfits, run_check=False)
 
     def phase_to_time(self, time=None):
         self.read_uvfits()
