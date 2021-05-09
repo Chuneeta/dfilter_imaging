@@ -2,7 +2,6 @@ import casatools as ct
 import casatasks as ctk
 import numpy as np
 import os
-import random
 
 class MSet(object):
     def __init__(self, msfile):
@@ -65,5 +64,5 @@ class MSet(object):
         _sh0, _sh1, _sh2 = data.shape
         nfreq = _sh1
         for i in range(nfreq):
-            data[0, i, :] = data[0, i, :] * (1 + (random.uniform(0, 1) * 1e-3))
+            data[0, i, :] = data[0, i, :] * (1 + (np.random.normal() * 1e-3))
         self.write_data(data, 'DATA')
