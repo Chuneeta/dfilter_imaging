@@ -94,6 +94,7 @@ class Filter(object):
         uvf = pyuvdata.UVData()
         uvf.read_uvfits(self.uvfits, run_check=False)
         freqs = uvf.freq_array[0]
+        if uvf.timesys == 'TAI': uvf.timesys = 'UTC'
         mod_uvf = copy.deepcopy(uvf)
         res_uvf = copy.deepcopy(uvf)
         self.filter_ants(bl_cut)
@@ -112,5 +113,5 @@ class Filter(object):
             mod_uvf.data_array[inds, 0, :, 0] = model
             res_uvf.data_array[inds, 0, :, 0] = resid
     
-        mod_uvf.write_uvfits(self.uvfits + 'F', run_check=False)
-        res_uvf.write_uvfits(self.uvfits + 'B', run_check=False)
+        mod_uvf.write_uvfits(self.uvfits + 'F', run_check=False, check_extra=False)
+        res_uvf.write_uvfits(self.uvfits + 'B', run_check=False, check_extra=False)
