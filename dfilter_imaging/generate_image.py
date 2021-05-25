@@ -13,7 +13,7 @@ class Image():
     def construct_phasecenter(self, ra, dec):
         ra_s = crd.deg2hms(ra)
         dec_s = crd.deg2dms(dec)
-        img_phs = 'J2000 {} {}'.format(ra, dec)
+        img_phs = 'J2000 {} {}'.format(ra_s, dec_s)
         return img_phs
 
     def reconstruct_phasecenter(self):
