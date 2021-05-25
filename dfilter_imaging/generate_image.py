@@ -10,7 +10,13 @@ class Image():
     def __init__(self, msfile):
         self.msfile = msfile
 
-    def construct_phasecenter(self):
+    def construct_phasecenter(self, ra, dec):
+        ra_s = crd.deg2hms(ra)
+        dec_s = crd.deg2dms(dec)
+        img_phs = 'J2000 {} {}'.format(ra, dec)
+        return img_phs
+
+    def reconstruct_phasecenter(self):
         ms = mt.MSet(self.msfile)
         phase_cnt = ms.get_phase_center()
         ra_s = crd.deg2hms(phase_cnt[0][0][0] * 180 / np.pi)
