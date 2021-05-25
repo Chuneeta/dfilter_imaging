@@ -1,11 +1,22 @@
 from beam_solver import fits_utils as ft
+from dfilter_imaging import ms_tools as mt
+from beam_solver import coord_utils as crd
 import casatasks as ctk
 import casatools as ct
+import numpy as np
 import os
 
 class Image():
     def __init__(self, msfile):
         self.msfile = msfile
+
+    def construct_phasecenter(self):
+        ms = mt.MSet(self.msfile)
+        phase_cnt = ms.get_phase_center()
+        ra_s = crd.deg2hms(phase_cnt[0][0][0] * 180 / np.pi)
+        dec_s = crd.deg2dms(phase_cnt[1][0][0] * 180/ np.pi)
+        img_phs = 'J2000 {} {}'.format(ra_s, dec_s)
+        return img_phs
 
     def generate_mfs_image(self, imagename, cell='8arcmin', imsize=512, weighting='uniform', niter=0, start=0, stop=1023, threshold='0Jy', phasecenter='', pblimit=0):
         #vp = ct.vpmanager()
