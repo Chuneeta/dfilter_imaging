@@ -71,11 +71,11 @@ class Filter(object):
     def __init__(self, uvfits):
         self.uvfits = uvfits
 
-    def get_filter(self, freqs, data, wgts, bl_length, suppression_factors=[1e-9], mode='dayenu'):
+    def get_filter(self, freqs, data, wgts, bl_length, suppression_factors=[1e-9], buffer_delay=0, mode='dayenu'):
         bl_delay = bl_length / c
         model, resid, info = dspec.fourier_filter(x=freqs, data=data, wgts=wgts,
                                               mode=mode, filter_centers=[0.], skip_wgt=0.1,
-                                              filter_half_widths=[bl_delay], suppression_factors=suppression_factors,
+                                              filter_half_widths=[bl_delay + buffer_delay], suppression_factors=suppression_factors,
                                               cache=MYCACHE, max_contiguous_edge_flags=20)
 
         return model, resid, info
@@ -90,7 +90,7 @@ class Filter(object):
                 if bl_length <= cut_bl:
                     self.filtered_bls.append((a1, a2))
 
-    def apply_filter(self, bl_cut, bl_length=None, scale=1):
+    def apply_filter(self, bl_cut, bl_length=None, scale=1, suppression_factors=[1e-9]):
         uvf = pyuvdata.UVData()
         uvf.read_uvfits(self.uvfits, run_check=False)
         freqs = uvf.freq_array[0]
