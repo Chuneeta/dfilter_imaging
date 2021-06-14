@@ -109,7 +109,7 @@ class Filter(object):
                 ind1 = np.where(ants == bl[0])
                 ind2 = np.where(ants == bl[1])
                 bl_length = np.sqrt((enu_pos[ind1][0][0] - enu_pos[ind2][0][0])**2 + (enu_pos[ind1][0][1] - enu_pos[ind2][0][1])**2)
-            if add_structure:
+            if add_structures:
                 if bl_length < struct_min:
                     f = np.linspace(1, 100, len(freqs))
                     x_noise = 0.4*np.sin(t/(0.0125*np.pi))
