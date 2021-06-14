@@ -90,7 +90,7 @@ class Filter(object):
                 if bl_length <= cut_bl:
                     self.filtered_bls.append((a1, a2))
 
-    def apply_filter(self, bl_cut, bl_length=None, scale=1, suppression_factors=[1e-9]):
+    def apply_filter(self, bl_cut, bl_length=None, scale=1, buffer_delay, suppression_factors=[1e-9]):
         uvf = pyuvdata.UVData()
         uvf.read_uvfits(self.uvfits, run_check=False)
         freqs = uvf.freq_array[0]
@@ -109,7 +109,7 @@ class Filter(object):
                 ind1 = np.where(ants == bl[0])
                 ind2 = np.where(ants == bl[1])
                 bl_length = np.sqrt((enu_pos[ind1][0][0] - enu_pos[ind2][0][0])**2 + (enu_pos[ind1][0][1] - enu_pos[ind2][0][1])**2)
-            model, resid, info = self.get_filter(freqs, data_bl, wgts, scale * bl_length, mode='dayenu')
+            model, resid, info = self.get_filter(freqs, data_bl, wgts, scale * bl_length, buffer_delay=buffer_delay, mode='dayenu', suppression_factors=suppression_factors)
             mod_uvf.data_array[inds, 0, :, 0] = model
             res_uvf.data_array[inds, 0, :, 0] = resid
     
