@@ -90,7 +90,7 @@ class Filter(object):
                 if bl_length <= cut_bl:
                     self.filtered_bls.append((a1, a2))
 
-    def apply_filter(self, bl_cut, bl_length=None, scale=1, buffer_delay, suppression_factors=[1e-9]):
+    def apply_filter(self, bl_cut, bl_length=None, scale=1, buffer_delay=0, suppression_factors=[1e-9]):
         uvf = pyuvdata.UVData()
         uvf.read_uvfits(self.uvfits, run_check=False)
         freqs = uvf.freq_array[0]
