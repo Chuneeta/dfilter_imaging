@@ -80,17 +80,18 @@ class Filter(object):
 
         return model, resid, info
 
-    def filter_ants(self, cut_bl):
+    def filter_ants(self, bl_cut):
         self.filtered_bls = []
         for i, a1 in enumerate(ants):
             ind1 = np.where(ants == a1)
-            for j, a2 in enumerate(ants[i+1:]):
+            for a2 in ants[i+1:]:
                 ind2 = np.where(ants == a2)
-                bl_length = np.sqrt((enu_pos[ind1][0][0] - enu_pos[ind2][0][0])**2 + (enu_pos[ind1][0][1] - enu_pos[ind2][0][1])**2)
-                if bl_length <= cut_bl:
+                #bl_length = np.sqrt((enu_pos[ind1][0][0] - enu_pos[ind2][0][0])**2 + (enu_pos[ind1][0][1] - enu_pos[ind2][0][1])**2)
+                bl_length = np.linalg.norm(enu_pos[ind1] - enu_pos[ind2])
+                if bl_length <= bl_cut:
                     self.filtered_bls.append((a1, a2))
 
-    def apply_filter(self, bl_cut, bl_length=None, scale=1, buffer_delay=0, suppression_factors=[1e-9], add_structures=False, struct_min=0):
+    def apply_filter(self, bl_cut, filter_length=None, scale=1, buffer_delay=0, suppression_factors=[1e-9], add_structures=False, struct_min=0):
         uvf = pyuvdata.UVData()
         uvf.read_uvfits(self.uvfits, run_check=False)
         freqs = uvf.freq_array[0]
@@ -105,13 +106,13 @@ class Filter(object):
             inds = uvf.antpair2ind(bl)
             data_bl = uvf.get_data(bl)
             wgts = np.ones(data_bl.shape)
-            if bl_length is None:
+            if filter_length is None :
                 ind1 = np.where(ants == bl[0])
                 ind2 = np.where(ants == bl[1])
-                bl_length = np.sqrt((enu_pos[ind1][0][0] - enu_pos[ind2][0][0])**2 + (enu_pos[ind1][0][1] - enu_pos[ind2][0][1])**2)
-                print (bl,bl_length)
                 bl_length = np.linalg.norm(enu_pos[ind1] - enu_pos[ind2])
                 print (bl,bl_length,bl_length*scale / c)
+            else:
+                filter_length = bl_length
             if add_structures:
                 if bl_length < struct_min:
                     f = np.linspace(1, 100, len(freqs))
