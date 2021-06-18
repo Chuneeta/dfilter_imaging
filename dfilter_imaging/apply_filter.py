@@ -110,7 +110,6 @@ class Filter(object):
                 ind1 = np.where(ants == bl[0])
                 ind2 = np.where(ants == bl[1])
                 bl_length = np.linalg.norm(enu_pos[ind1] - enu_pos[ind2])
-                print (bl,bl_length,bl_length*scale / c)
             else:
                 filter_length = bl_length
             if add_structures:
