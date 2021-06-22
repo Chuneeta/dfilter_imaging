@@ -111,7 +111,7 @@ class Filter(object):
                 ind2 = np.where(ants == bl[1])
                 bl_length = np.linalg.norm(enu_pos[ind1] - enu_pos[ind2])
             else:
-                filter_length = bl_length
+                bl_length = filter_length
             if add_structures:
                 if bl_length < struct_min:
                     f = np.linspace(1, 100, len(freqs))
