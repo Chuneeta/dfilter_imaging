@@ -43,4 +43,6 @@ class Simulate():
         self.generate_model_vis()
         ms = mt.MSet(self.msfile)
         ms.transfer_data(column_in='MODEL_DATA', column_out='DATA')    
-
+        # setting flag to False
+        flags = ms.read_col('FLAG')
+        flags[:, :, :] = False
