@@ -26,7 +26,7 @@ class Image():
 
     def generate_mfs_image(self, imagename, cell='8arcmin', imsize=512, weighting='uniform', niter=0, start=0, stop=1023, threshold='0Jy', phasecenter='', pblimit=0, ants=''):
         spw = '0:{}~{}'.format(start, stop)
-        ctk.tclean(self.msfile, imagename=imagename, cell=cell, imsize=imsize, weighting=weighting, spw=spw, niter=niter, threshold=threshold, phasecenter=phasecenter, pblimit=pblimit, ants=ants)
+        ctk.tclean(self.msfile, imagename=imagename, cell=cell, imsize=imsize, weighting=weighting, spw=spw, niter=niter, threshold=threshold, phasecenter=phasecenter, pblimit=pblimit, antenna=ants)
         ia = ct.image()
         ia.open(imagename + '.image')
         ia.maskhandler('delete', 'mask0')
