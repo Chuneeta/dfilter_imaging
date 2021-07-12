@@ -66,3 +66,18 @@ class MSet(object):
         for i in range(nfreq):
             data[0, i, :] = data[0, i, :] * (1 + (np.random.normal() * 1e-3))
         self.write_data(data, 'DATA')
+
+    def get_data(self, ant0, ant1, pol, column='DATA'):
+        data = self.read_col(column)
+        A1 = self.read_col('ANTENNA1')
+        A2 = self.read_col('ANTENNA2')
+        inds = np.where((A1 == ant0) & (A2 == ant1))
+        if pol=='xx': polid = 0
+        data_bl = data[polid, :, inds[0]]
+        return data_bl
+
+    def set_flags_None(self):
+        flags = self.read_col('FLAG')
+        flags[:, :, :] = False
+        self.write_data(flags, 'FLAG')
+        
